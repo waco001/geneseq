@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation - geneseq</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Installation";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> geneseq</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Installation</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#dependencies">Dependencies</a></li>
+                
+                    <li><a class="toctree-l4" href="#docker">Docker</a></li>
+                
+                    <li><a class="toctree-l4" href="#docker-image">Docker Image</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#setup">Setup</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#running-the-application">Running the Application</a></li>
+                
+                    <li><a class="toctree-l4" href="#first-time-run">First Time Run</a></li>
+                
+                    <li><a class="toctree-l4" href="#run">Run</a></li>
+                
+                    <li><a class="toctree-l4" href="#detaching-from-container">Detaching from Container</a></li>
+                
+                    <li><a class="toctree-l4" href="#attaching-to-container">Attaching to Container</a></li>
+                
+                    <li><a class="toctree-l4" href="#using-mongo-express">Using Mongo Express</a></li>
+                
+                    <li><a class="toctree-l4" href="#viewing">Viewing</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">geneseq</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Installation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="dependencies">Dependencies</h1>
+<h3 id="docker">Docker</h3>
+<p>Follow <a href="http://docs.docker.com/engine/installation/">these instructions</a> to setup Docker specific to your machine.</p>
+<h3 id="docker-image">Docker Image</h3>
+<p>The Docker Image contains all the source code for the application.
+Use <code>docker pull waco001/geneseq</code> to download the Image.</p>
+<h1 id="setup">Setup</h1>
+<p>In order to run the application you will need to create a Docker-Data folder. This folder acts as a bridge between your computer and the Docker Virtual Machine. Move the given <strong>gene dump file</strong> and unzip it in that folder with <code>tar -zxvf mongodump.tar.gz</code>.</p>
+<p>Make the folders required for the MongoDB to initialize in. <code>mkdir db</code></p>
+<h1 id="running-the-application">Running the Application</h1>
+<p>Run the container with <code>docker run -p 80:8080 -p 8081:8081 -v ~/Docker-Data:/data -i -t waco001/geneseq</code>. Replace <code>~/Docker-Data</code> with the path of your Docker-Data folder.</p>
+<h2 id="first-time-run">First Time Run</h2>
+<p>In order to completely setup the application for the first time, we need to import the existing data into the MongoDB server. Enter these commands from within the Docker Container.</p>
+<p>If your MongoDB service is not running, you can commandeer it with <code>service mongod start|stop|restart|status</code>.</p>
+<p><code>mongorestore --db gene_locale dump/gene_locale --drop</code> imports all the extracted gene data from <strong>/dump</strong> and puts it into a Mongo format in <strong>/db</strong>. The <code>--drop</code> command is used to overwrite all data in the <strong>gene_locale</strong> database.</p>
+<h4 id="notice">Notice</h4>
+<p>Certain MongoDB versions 3.0.7 (latest as of 11/27/15) have a <a href="">bug</a> when trying to import new data using <code>mongorestore</code>. It will return an error about the End-Of-File for the dump. A solution is to use the <code>batchsize</code> parameter. This will make the command run much slower though. Using <code>mongorestore --db gene_locale dump/gene_locale --drop --batchsize=1000</code> will bypass this error.</p>
+<h2 id="run">Run</h2>
+<p>In some cases, the MongoDB server and the webserver will not run on start. <code>mongod --fork --syslog</code> will start the MongoDB server. Use <code>python3 /opt/geneseq/source/wsgi.py</code> to start the web server afterwards.</p>
+<p>Condensed: <code>mongod --fork --syslog &amp;&amp; python3 /opt/geneseq/source/wsgi.py</code></p>
+<h2 id="detaching-from-container">Detaching from Container</h2>
+<p>Use <code>CTRL P + Q</code> will detach from the current session, but leave it running in the background.</p>
+<h2 id="attaching-to-container">Attaching to Container</h2>
+<p><code>docker ps</code> Will show a list of currently running containers.</p>
+<table>
+<thead>
+<tr>
+<th>CONTAINER ID</th>
+<th>IMAGE</th>
+<th>COMMAND</th>
+<th>CREATED</th>
+<th>STATUS</th>
+<th>PORTS</th>
+<th>NAMES</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>67c3e6bdc363</td>
+<td>waco001/geneseq</td>
+<td>"/bin/sh -c '/bin/bas"</td>
+<td>3 minutes ago</td>
+<td>Up 3 minutes</td>
+<td>0.0.0.0:80-&gt;8080/tcp, 0.0.0.0:32769-&gt;8081/tcp</td>
+<td>amazing_mirzakhani</td>
+</tr>
+</tbody>
+</table>
+<p>Use the first 3 characters of your generated <strong>Container ID</strong> to re-attach to the container. <code>docker attach 67c</code></p>
+<h2 id="using-mongo-express">Using Mongo Express</h2>
+<p><a href="https://github.com/andzdroid/mongo-express">Mongo Express</a> is a tool similar to PHP-MyAdmin to view and edit MongoDB tables in the web browser. Install it globally with <code>npm install -g mongo-express</code>.</p>
+<h2 id="viewing">Viewing</h2>
+<p>Access the site locally at <code>0.0.0.0</code> and view the MongoExpress at <code>0.0.0.0:8081</code></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+
+</body>
+</html>

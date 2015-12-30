@@ -1,0 +1,69 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Welcome to geneseq\n\n\nGeneseq is an intuitive and efficient web-resource that enables a researcher to obtain a highly informative snapshot of the activity of any of the ~60,000 genes in the genome.\n\n\nComponents\n\n\nGeneseq is composed of state of the art database, virtualisation, and visualisation technologies (including MongoDB, Docker, and D3.js).\n\n\n\n\n\n\n\n\nStack\n\n\n\n\n\n\n\n\n\n\nDocker\n\n\n\n\n\n\nPython\n\n\n\n\n\n\nCherryPy\n\n\n\n\n\n\nMongoDB\n\n\n\n\n\n\nBootstrap \n D3.js", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#welcome-to-geneseq", 
+            "text": "Geneseq is an intuitive and efficient web-resource that enables a researcher to obtain a highly informative snapshot of the activity of any of the ~60,000 genes in the genome.", 
+            "title": "Welcome to geneseq"
+        }, 
+        {
+            "location": "/#components", 
+            "text": "Geneseq is composed of state of the art database, virtualisation, and visualisation technologies (including MongoDB, Docker, and D3.js).     Stack      Docker    Python    CherryPy    MongoDB    Bootstrap   D3.js", 
+            "title": "Components"
+        }, 
+        {
+            "location": "/installation/", 
+            "text": "Dependencies\n\n\nDocker\n\n\nFollow \nthese instructions\n to setup Docker specific to your machine.\n\n\nDocker Image\n\n\nThe Docker Image contains all the source code for the application.\nUse \ndocker pull waco001/geneseq\n to download the Image.\n\n\nSetup\n\n\nIn order to run the application you will need to create a Docker-Data folder. This folder acts as a bridge between your computer and the Docker Virtual Machine. Move the given \ngene dump file\n and unzip it in that folder with \ntar -zxvf mongodump.tar.gz\n.\n\n\nMake the folders required for the MongoDB to initialize in. \nmkdir db\n\n\nRunning the Application\n\n\nRun the container with \ndocker run -p 80:8080 -p 8081:8081 -v ~/Docker-Data:/data -i -t waco001/geneseq\n. Replace \n~/Docker-Data\n with the path of your Docker-Data folder.\n\n\nFirst Time Run\n\n\nIn order to completely setup the application for the first time, we need to import the existing data into the MongoDB server. Enter these commands from within the Docker Container.\n\n\nIf your MongoDB service is not running, you can commandeer it with \nservice mongod start|stop|restart|status\n.\n\n\nmongorestore --db gene_locale dump/gene_locale --drop\n imports all the extracted gene data from \n/dump\n and puts it into a Mongo format in \n/db\n. The \n--drop\n command is used to overwrite all data in the \ngene_locale\n database.\n\n\nNotice\n\n\nCertain MongoDB versions 3.0.7 (latest as of 11/27/15) have a \nbug\n when trying to import new data using \nmongorestore\n. It will return an error about the End-Of-File for the dump. A solution is to use the \nbatchsize\n parameter. This will make the command run much slower though. Using \nmongorestore --db gene_locale dump/gene_locale --drop --batchsize=1000\n will bypass this error.\n\n\nRun\n\n\nIn some cases, the MongoDB server and the webserver will not run on start. \nmongod --fork --syslog\n will start the MongoDB server. Use \npython3 /opt/geneseq/source/wsgi.py\n to start the web server afterwards.\n\n\nCondensed: \nmongod --fork --syslog \n python3 /opt/geneseq/source/wsgi.py\n\n\nDetaching from Container\n\n\nUse \nCTRL P + Q\n will detach from the current session, but leave it running in the background.\n\n\nAttaching to Container\n\n\ndocker ps\n Will show a list of currently running containers.\n\n\n\n\n\n\n\n\nCONTAINER ID\n\n\nIMAGE\n\n\nCOMMAND\n\n\nCREATED\n\n\nSTATUS\n\n\nPORTS\n\n\nNAMES\n\n\n\n\n\n\n\n\n\n\n67c3e6bdc363\n\n\nwaco001/geneseq\n\n\n\"/bin/sh -c '/bin/bas\"\n\n\n3 minutes ago\n\n\nUp 3 minutes\n\n\n0.0.0.0:80-\n8080/tcp, 0.0.0.0:32769-\n8081/tcp\n\n\namazing_mirzakhani\n\n\n\n\n\n\n\n\nUse the first 3 characters of your generated \nContainer ID\n to re-attach to the container. \ndocker attach 67c\n\n\nUsing Mongo Express\n\n\nMongo Express\n is a tool similar to PHP-MyAdmin to view and edit MongoDB tables in the web browser. Install it globally with \nnpm install -g mongo-express\n.\n\n\nViewing\n\n\nAccess the site locally at \n0.0.0.0\n and view the MongoExpress at \n0.0.0.0:8081", 
+            "title": "Installation"
+        }, 
+        {
+            "location": "/installation/#dependencies", 
+            "text": "Docker  Follow  these instructions  to setup Docker specific to your machine.  Docker Image  The Docker Image contains all the source code for the application.\nUse  docker pull waco001/geneseq  to download the Image.", 
+            "title": "Dependencies"
+        }, 
+        {
+            "location": "/installation/#setup", 
+            "text": "In order to run the application you will need to create a Docker-Data folder. This folder acts as a bridge between your computer and the Docker Virtual Machine. Move the given  gene dump file  and unzip it in that folder with  tar -zxvf mongodump.tar.gz .  Make the folders required for the MongoDB to initialize in.  mkdir db", 
+            "title": "Setup"
+        }, 
+        {
+            "location": "/installation/#running-the-application", 
+            "text": "Run the container with  docker run -p 80:8080 -p 8081:8081 -v ~/Docker-Data:/data -i -t waco001/geneseq . Replace  ~/Docker-Data  with the path of your Docker-Data folder.", 
+            "title": "Running the Application"
+        }, 
+        {
+            "location": "/installation/#first-time-run", 
+            "text": "In order to completely setup the application for the first time, we need to import the existing data into the MongoDB server. Enter these commands from within the Docker Container.  If your MongoDB service is not running, you can commandeer it with  service mongod start|stop|restart|status .  mongorestore --db gene_locale dump/gene_locale --drop  imports all the extracted gene data from  /dump  and puts it into a Mongo format in  /db . The  --drop  command is used to overwrite all data in the  gene_locale  database.  Notice  Certain MongoDB versions 3.0.7 (latest as of 11/27/15) have a  bug  when trying to import new data using  mongorestore . It will return an error about the End-Of-File for the dump. A solution is to use the  batchsize  parameter. This will make the command run much slower though. Using  mongorestore --db gene_locale dump/gene_locale --drop --batchsize=1000  will bypass this error.", 
+            "title": "First Time Run"
+        }, 
+        {
+            "location": "/installation/#run", 
+            "text": "In some cases, the MongoDB server and the webserver will not run on start.  mongod --fork --syslog  will start the MongoDB server. Use  python3 /opt/geneseq/source/wsgi.py  to start the web server afterwards.  Condensed:  mongod --fork --syslog   python3 /opt/geneseq/source/wsgi.py", 
+            "title": "Run"
+        }, 
+        {
+            "location": "/installation/#detaching-from-container", 
+            "text": "Use  CTRL P + Q  will detach from the current session, but leave it running in the background.", 
+            "title": "Detaching from Container"
+        }, 
+        {
+            "location": "/installation/#attaching-to-container", 
+            "text": "docker ps  Will show a list of currently running containers.     CONTAINER ID  IMAGE  COMMAND  CREATED  STATUS  PORTS  NAMES      67c3e6bdc363  waco001/geneseq  \"/bin/sh -c '/bin/bas\"  3 minutes ago  Up 3 minutes  0.0.0.0:80- 8080/tcp, 0.0.0.0:32769- 8081/tcp  amazing_mirzakhani     Use the first 3 characters of your generated  Container ID  to re-attach to the container.  docker attach 67c", 
+            "title": "Attaching to Container"
+        }, 
+        {
+            "location": "/installation/#using-mongo-express", 
+            "text": "Mongo Express  is a tool similar to PHP-MyAdmin to view and edit MongoDB tables in the web browser. Install it globally with  npm install -g mongo-express .", 
+            "title": "Using Mongo Express"
+        }, 
+        {
+            "location": "/installation/#viewing", 
+            "text": "Access the site locally at  0.0.0.0  and view the MongoExpress at  0.0.0.0:8081", 
+            "title": "Viewing"
+        }
+    ]
+}
