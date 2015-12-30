@@ -1,4 +1,3 @@
-import cherrypy
 from pymongo import MongoClient
 from bcrypt import hashpw
 from bcrypt import gensalt
@@ -173,23 +172,10 @@ class Auth(object):
             return True
         else:
             return False
-    def isLoggedIn(self, annot, pipe):
-        if(app.settings.SESSION_KEY is not None):
-            if(annot==True):
-                logger.debug("Auth Annotation")
-                return pipe.db.mouse_annotations_auth
-            else:
-                logger.debug("Auth No Annotation")
-                return pipe.db.mouse_auth
-        else:
-            if(annot==True):
-                logger.debug("No Auth Annotation")
-                return pipe.db.mouse_annotations
-            else:
-                logger.debug("No Auth No Annotation")
-                return pipe.db.mouse
+
 
 class Parent(object):
+
     def __init__(self, pipe):
         self.pipe = pipe
 
@@ -407,8 +393,8 @@ class Mouse(Parent):
         find = dict()
         find['filter'] = {'_id': mouse_id}
         find['projection'] = {'processed': 1}
-        
-        gene = pipe.auth.isLoggedIn(None,pipe).find_one(**find)
+
+        gene = pipe.db.mouse.find_one(**find)
         pipe.disconnect()
 
         if gene is None:
@@ -443,7 +429,7 @@ class Mouse(Parent):
                      {'$project': {'_id': '$expression.name',
                                    'region': '$expression.regions.region',
                                    'value': '$expression.regions.values'}}]
-        cursor = pipe.auth.isLoggedIn(None,pipe).aggregate(aggregate)
+        cursor = pipe.db.mouse.aggregate(aggregate)
         pipe.disconnect()
         data = list()
         for item in cursor:
@@ -455,7 +441,7 @@ class Mouse(Parent):
         pipe = self.pipe
         pipe.connect()
 
-        c = pipe.auth.isLoggedIn(True,pipe)
+        c = pipe.db.mouse_annotations
         find = {'projection': {'_id': 0, 'level2': 0, 'level4': 0}}
         if not super:
             find['filter'] = {'protected': False}
@@ -472,7 +458,7 @@ class Mouse(Parent):
         pipe.connect()
         pipeline = [{'$match': {'processed': {'$exists': True}}},
                     {'$group': {'_id': '$processed.type'}}]
-        cursor = pipe.auth.isLoggedIn(None,pipe).aggregate(pipeline)
+        cursor = pipe.db.mouse.aggregate(pipeline)
         celltypes = list()
         for cell in cursor:
             celltypes.append(cell['_id'])
@@ -486,7 +472,7 @@ class Mouse(Parent):
         pipe = self.pipe
         pipe.connect()
         logger.debug('starting aggregation')
-        # cursor = pipe.auth.isLoggedIn(None,pipe).aggregate([{'$unwind': '$expression'},
+        # cursor = pipe.db.mouse.aggregate([{'$unwind': '$expression'},
         #     {'$unwind': '$expression.values'},
         #     {'$group': {'_id': {'id': '$_id',
         #                         'cell': '$expression.name'},
@@ -547,7 +533,7 @@ class Mouse(Parent):
 
         pipe = self.pipe
         pipe.connect()
-        cursor = pipe.auth.isLoggedIn(None,pipe).aggregate(find)
+        cursor = pipe.db.mouse.aggregate(find)
         data = list()
         for item in cursor:
             data.append(item)
