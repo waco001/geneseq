@@ -1,0 +1,22 @@
+<%inherit file="base.html"/>
+
+<%block name="content">
+<div id="content-wrapper" class="content" style="
+text-align: center;">
+<h1 style="margin-top: 10%;">geneseq</h1>
+     <form name="search" action="/search" method="get">
+     <div class="span3 input-append" style="">
+         <input class="span2" style="height:40px;width:400px;" id="main_search" type="text" name="query" type="text" placeholder="Search"
+         % if not query is UNDEFINED:
+         value="${query}"
+         % endif
+         >
+         <input class="btn btn-large btn-primary" type="button" value="search" style="height: 35px;">
+     </div>
+     </form>
+<p>
+<a href="#" class="btn btn-primary btn-md" role="button">Mouse Table</a>
+<a href="#" class="btn btn-primary btn-md" role="button">Human Table</a>
+</p>
+</div>
+</%block>

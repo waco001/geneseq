@@ -1,0 +1,3 @@
+sudo docker rm mongodb
+//Removes mongodb name from system
+sudo docker run -p 27017:27017 --name mongodb -d waco001/geneseq-mongo /sbin/my_init --enable-insecure-key
