@@ -79,7 +79,7 @@ var mouse = new function() {
 
                 margin.bottom = 10 + data.axis_length * 5;
                 xscale.domain(data.names)
-                      .rangePoints([0, width]);
+                      .rangePoints([0 + 1, width]);
                 yscale.domain([data.min - 1, data.max])
                       .range([height, 0]);
                 console.log(data.names);
