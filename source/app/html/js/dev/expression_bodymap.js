@@ -19,7 +19,7 @@ var bodymap = new function() {
     margin.bottom = 200;
 
     var max_width = 500;
-    var default_radius = 5;
+    var default_radius = 3;
 
     /**
      * Gets width for plot
@@ -112,8 +112,8 @@ var bodymap = new function() {
                     .attr('transform', 'translate(0,' + height + ')')
                     .call(xaxis)
                     .selectAll('text')
-                    .attr('x', '-.3em')
-                    .attr('y', '-.3em')
+                    .attr('x', '-1em')
+                    .attr('y', '0em')
                     .attr('transform', 'rotate(-65)');
 
                 canvas.append('g')
