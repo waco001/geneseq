@@ -25,7 +25,7 @@ app.settings.setCellTypes('mouse', celltypes)
 
 class Root(Parent):
     """service mounted on /
-    currently renders nothing, will be landing page
+    Returns landing page
     """
     exposed = True
 
