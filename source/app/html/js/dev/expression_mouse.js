@@ -118,8 +118,9 @@ var mouse = new function() {
 
                 canvas.append('g')
                     .attr('class', 'axis')
-                    .attr('x', '-1em')
-                    .call(yaxis);
+                    .call(yaxis)
+                    .selectAll('text')
+                    .attr('x', '-1em');
 
                 canvas.selectAll('circle')
                     .data(data.values)
