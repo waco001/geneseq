@@ -66,13 +66,6 @@
       <div id="content" class="mains fleft">
         <%block name="content"/>
       </div>
-      <div id="footer" class="fleft">
-        % if not login is UNDEFINED and login is not None and login:
-        <li class="pure-menu-item"><a href="/logout" class="url pure-menu-link">Logout</a></li>
-        % else:
-        <li class="pure-menu-item"><a href="/login" class="url pure-menu-link">Login</a></li>
-        % endif
-      </div>
     </div>
   </body>
 </html>
