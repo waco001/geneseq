@@ -33,6 +33,14 @@ ADD run_mongo.sh /etc/service/mongo/run
 RUN chmod +x /etc/service/mongo/run
 RUN chown root /etc/service/mongo/run
 
+#RUN mkdir /etc/service/mzapprun
+#ADD run_mzapp.sh /etc/service/mzapprun/run
+#RUN chmod +x /etc/service/mzapprun/run
+#RUN chown root /etc/service/mzapprun/run
+
+#RUN mkdir -p /etc/my_init.d
+#ADD startgit /etc/my_init.d/startgit.sh
+
 #Copy new mongo conf file over
 COPY mongod.conf /etc/
 
@@ -41,7 +49,7 @@ COPY pip_requirements.txt /tmp/
 RUN pip3 install -r /tmp/pip_requirements.txt
 
 RUN  git clone https://github.com/waco001/geneseq.git \
-    /opt/geneseq && \
+    /opt/ && \
     ln -s /opt/geneseq/source /usr/local/lib/geneseq && \
     ln -s /opt/geneseq/data/update_processed.py /usr/local/bin/update_processed && \
     ln -s /opt/geneseq/data/update_mouse_expression.py /usr/local/bin/update_mouse_expression && \
