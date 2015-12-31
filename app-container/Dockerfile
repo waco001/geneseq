@@ -40,7 +40,7 @@ COPY mongod.conf /etc/
 COPY pip_requirements.txt /tmp/
 RUN pip3 install -r /tmp/pip_requirements.txt
 
-RUN  git clone https://github.com/miclaraia/geneseq.git \
+RUN  git clone https://github.com/waco001/geneseq.git \
     /opt/geneseq && \
     ln -s /opt/geneseq/source /usr/local/lib/geneseq && \
     ln -s /opt/geneseq/data/update_processed.py /usr/local/bin/update_processed && \
