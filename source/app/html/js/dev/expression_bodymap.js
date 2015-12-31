@@ -118,7 +118,9 @@ var bodymap = new function() {
 
                 canvas.append('g')
                     .attr('class', 'axis')
-                    .call(yaxis);
+                    .call(yaxis)
+                    .selectAll('text')
+                    .attr('x', '-1em');
 
                 canvas.selectAll('circle')
                     .data(data.values)
