@@ -235,7 +235,7 @@ cherrypy.config.update('%s/conf/global.conf' % path)
 cherrypy.tree.mount(app.mouse.Mouse(lookup), '/mouse', config='%s/conf/gene.conf' % path)
 cherrypy.tree.mount(app.human.Human(lookup), '/human', config='%s/conf/gene.conf' % path)
 cherrypy.tree.mount(Root(), '/', config='%s/conf/root.conf' % path)
-cherrypy.tree.mount(Admin(lookup), '/admin/')
+cherrypy.tree.mount(Admin(lookup), '/admin', config='%s/conf/root.conf' % path)
 # attaches config files to each webapp
 for item in [v[1] for v in cherrypy.tree.apps.items()]:
     item.merge('%s/conf/apps.conf' % path)
