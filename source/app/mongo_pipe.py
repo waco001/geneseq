@@ -181,7 +181,7 @@ class Auth(object):
         record = pipe.db.users.find_one({'username': username})
         pipe.disconnect()
 
-        if record is not None and record['role'] is role:
+        if record is not None and int(record['role']) is role:
             return True
         else:
             return False
