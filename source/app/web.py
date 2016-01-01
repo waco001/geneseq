@@ -219,6 +219,7 @@ class Admin(Parent):
             kwargs['Title'] = 'Admin Hub'
             if 'ref' not in kwargs:
                 kwargs['ref'] = '/'
+                kwargs['username'] = self.getCurrentUsername()
                 kwargs = self.mako_args(kwargs)
             tmpl = lookup.get_template("admin.html")
             try:

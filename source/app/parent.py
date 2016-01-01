@@ -67,7 +67,15 @@ class Parent(object):
         if session is not None:
             return True
         return False
-
+    def getCurrentUsername(self):
+        """
+        Checks if user is logged in
+        Returns:
+            string: username, if logged in
+        """
+        session = self.getSession()
+        if session is not None:
+            return session
     def isSuper(self):
         """
         checks if user has access to protected data
