@@ -215,7 +215,7 @@ class Admin(Parent):
     """handles all admin functionality mounted on /admin/"""
     def GET(self):
         """responds to GET requests"""
-        if Parent.isLoggedIn() is True and Parent.isRole(1):
+        if Parent.isLoggedIn() is True:
             kwargs['Title'] = 'Admin Hub'
             if 'ref' not in kwargs:
                 kwargs['ref'] = '/'
