@@ -174,7 +174,7 @@ class Auth(object):
             return False
     def isRole(self, user, role):
         logger.debug('username: %s' % user)
-        if username is None:
+        if user is None:
             return False
         pipe = self.pipe
         pipe.connect()
