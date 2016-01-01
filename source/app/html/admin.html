@@ -1,0 +1,45 @@
+<%inherit file="base.html"/>
+
+<%block name="resources">
+<script type="text/javascript" src="/js/lib/jquery.validate.js"></script>
+<script type="text/javascript" src="/js/dev/login.js"></script>
+   <link rel="stylesheet" type="text/css" href="/css/login.css">
+</%block>
+
+<%block name="content">
+<div class="container">
+    <div class="page-header">
+        <h1>Administrator Hub<span class="pull-right label label-default">Welcome &lt;NAME&gt;</span></h1>
+    </div>
+    <div class="row">
+    	
+        <div class="col-md-12">
+            <div class="panel with-nav-tabs panel-primary">
+                <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1primary" data-toggle="tab" aria-expanded="true">Primary 1</a></li>
+                            <li class=""><a href="#tab2primary" data-toggle="tab" aria-expanded="false">Primary 2</a></li>
+                            <li class=""><a href="#tab3primary" data-toggle="tab" aria-expanded="false">Primary 3</a></li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#tab4primary" data-toggle="tab">Primary 4</a></li>
+                                    <li><a href="#tab5primary" data-toggle="tab">Primary 5</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="tab1primary">Primary 1</div>
+                        <div class="tab-pane fade" id="tab2primary">Primary 2</div>
+                        <div class="tab-pane fade" id="tab3primary">Primary 3</div>
+                        <div class="tab-pane fade" id="tab4primary">Primary 4</div>
+                        <div class="tab-pane fade" id="tab5primary">Primary 5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+</%block>

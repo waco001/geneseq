@@ -36,7 +36,7 @@ class Root(Parent):
         self.session = app.settings.SESSION_KEY
         self.gene = Gene(lookup)
         self.search = Search(lookup)
-
+        self.admin = Admin(lookup)
     def GET(self, **kwargs):
         logger.info('/ GET request')
         logger.debug('GET kwargs: %s' % str(kwargs))
@@ -211,6 +211,23 @@ class Logout(Parent):
             kwargs['ref'] = '/'
         raise cherrypy.HTTPRedirect(kwargs['ref'])
 
+class Admin(Parent):
+    """handles all admin functionality mounted on /admin/"""
+    def GET(self):
+        """responds to GET requests"""
+        if Parent.isLoggedIn() is True and Parent.isRole(1):
+            kwargs['Title'] = 'Admin Hub'
+            if 'ref' not in kwargs:
+                kwargs['ref'] = '/'
+                kwargs = self.mako_args(kwargs)
+            tmpl = lookup.get_template("admin.html")
+            try:
+                return tmpl.render(**kwargs)
+            except:
+                return exceptions.html_error_template().render()
+        else:
+            raise cherrypy.HTTPRedirect('/')
+
 
 # mounts all webapps to cherrypy tree
 cherrypy.config.update({'tools.staticdir.root': path})
@@ -218,6 +235,7 @@ cherrypy.config.update('%s/conf/global.conf' % path)
 cherrypy.tree.mount(app.mouse.Mouse(lookup), '/mouse', config='%s/conf/gene.conf' % path)
 cherrypy.tree.mount(app.human.Human(lookup), '/human', config='%s/conf/gene.conf' % path)
 cherrypy.tree.mount(Root(), '/', config='%s/conf/root.conf' % path)
+cherrypy.tree.mount(Admin(lookup), '/admin/')
 # attaches config files to each webapp
 for item in [v[1] for v in cherrypy.tree.apps.items()]:
     item.merge('%s/conf/apps.conf' % path)

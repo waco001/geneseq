@@ -76,7 +76,14 @@ class Parent(object):
         """
         user = self.getSession()
         return self.pipe.auth.isSuper(user)
-
+    def isRole(self, role):
+        """
+        checks if user is a given role level
+        Returns:
+            boolean: true if has the user has a role level
+        """
+        user = self.getSession()
+        return self.pipe.auth.isRole(user, role)
     def url(self):
         """
         Gets current url from cherrypy

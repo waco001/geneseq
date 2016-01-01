@@ -172,7 +172,19 @@ class Auth(object):
             return True
         else:
             return False
+    def isRole(self, user, role):
+        logger.debug('username: %s' % username)
+        if username is None:
+            return False
+        pipe = self.pipe
+        pipe.connect()
+        record = pipe.db.users.find_one({'username': username})
+        pipe.disconnect()
 
+        if record is not None and record['role'] is role:
+            return True
+        else:
+            return False
 
 class Parent(object):
 
