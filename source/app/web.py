@@ -231,8 +231,21 @@ class Admin(Parent):
                 return exceptions.html_error_template().render()
         else:
             raise cherrypy.HTTPRedirect('/')
+    def POST(self, **kwargs):
+        """responds to POST requests
+        Args:
+            id: (int) mysql row id number of gene
+        Returns:
+            html: gene.html with gene information and graphs
+                rendered
+        """
+        logger.info('/admin POST request')
+        logger.debug('POST kwargs: %s' % str(kwargs))
 
-
+        if 'method' in kwargs:
+            if kwargs['method'] == 'changeRole':
+                print(kwargs)
+        return json.dumps({'success': False})
 # mounts all webapps to cherrypy tree
 cherrypy.config.update({'tools.staticdir.root': path})
 cherrypy.config.update('%s/conf/global.conf' % path)
