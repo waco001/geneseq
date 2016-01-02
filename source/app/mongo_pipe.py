@@ -6,7 +6,7 @@ import app.settings
 import logging
 import pprint
 import re
-
+import json
 logger = logging.getLogger(__name__)
 pp = pprint.PrettyPrinter(indent=4)
 _ROUND_DECIMAL = 2
@@ -22,6 +22,7 @@ class Pipe(object):
         self.mouse = Mouse(self)
         self.human = Human(self)
         self.auth = Auth(self)
+        self.admin = Admin(self)
 
     def fixData(self, data, style='title', roundn=_ROUND_DECIMAL):
         """parses data to sync variable names and datatypes.
@@ -96,7 +97,19 @@ class Pipe(object):
 
         return mouse
 
-
+class Admin(object):
+    def __init__(self,pipe):
+        self.pipe = pipe
+    def getUserList(self):
+        pipe=self.pipe
+        pipe.connect()
+        record = pipe.db.users.find()
+        pipe.disconnect()
+        data = []
+        for idx, user in enumerate(record):
+            data[idx] = user
+            data[idx]['timestamp'] = user['_id'].generation_time
+        return data
 
 class Auth(object):
     def __init__(self, pipe):
@@ -133,6 +146,7 @@ class Auth(object):
             pipe.db.users.insert_one({'username': username,
                                       'password': digest,
                                       'super': False,
+                                      'role':'0',
                                       'email': email})
 
         pipe.disconnect()

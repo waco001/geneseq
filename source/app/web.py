@@ -10,6 +10,7 @@ import app.mongo_pipe
 import app.settings
 import pprint
 import json
+from bson.json_util import dumps
 
 logger = logging.getLogger(__name__)
 app.settings.init(cherrypy)
@@ -220,6 +221,8 @@ class Admin(Parent):
             if 'ref' not in kwargs:
                 kwargs['ref'] = '/'
                 kwargs['username'] = self.getCurrentUsername()
+                kwargs['data'] = _pipe.admin.getUserList()
+                print(kwargs['data'])
                 kwargs = self.mako_args(kwargs)
             tmpl = lookup.get_template("admin.html")
             try:
