@@ -105,10 +105,9 @@ class Admin(object):
         pipe.connect()
         record = pipe.db.users.find()
         pipe.disconnect()
-        data = []
-        for idx, user in enumerate(record):
-            data[idx] = user
-            data[idx]['timestamp'] = user['_id'].generation_time
+        data = list(record)
+        for user in data:
+            user['timestamp'] = user['_id'].generation_time
         return data
 
 class Auth(object):
