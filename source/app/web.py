@@ -246,7 +246,7 @@ class Admin(Parent):
                     kwargs['selectUserID'] = [kwargs['selectUserID']]
                     print(type(kwargs['selectUserID']))
                 res=_pipe.admin.modifyUserRole(kwargs['selectUserID'],kwargs['ChangeUserTo'])
-                return json.dumps({'success': True})
+        raise cherrypy.HTTPRedirect('/admin')
         return json.dumps({'success': False})
 # mounts all webapps to cherrypy tree
 cherrypy.config.update({'tools.staticdir.root': path})
