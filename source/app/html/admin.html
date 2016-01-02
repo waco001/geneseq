@@ -47,16 +47,16 @@
                                             ${user.get('num', 'ID Unknown')}
                                         </th>
                                         <td>
-                                            ${user.get('timestamp', 'Timestamp Unkown')}
+                                            ${user.get('timestamp', '<span style="color: red;">Timestamp Unkown</span>')}
                                         </td>
                                         <td>
-                                            ${user.get('username', 'Username Unknown')}
+                                            ${user.get('username', '<span style="color: red;">Username Unknown</span>')}
                                         </td>
                                         <td>
-                                            ${user.get('email', 'Email Unknown')}
+                                            ${user.get('email', '<span style="color: red;">Email Unknown</span>')}
                                         </td>
                                         <td>
-                                            ${user.get('role', 'Role Unkown')}
+                                            ${user.get('role', '<span style="color: red;">Role Unkown</span>')}
                                         </td>
                                     </tr>
                                     % endfor
