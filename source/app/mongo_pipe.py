@@ -122,8 +122,7 @@ class Admin(object):
                 {
                     "$set": {
                         "role": role
-                    },
-                    "$currentDate": {"lastModified": True}
+                    }
                 }
             )
         pipe.disconnect()
