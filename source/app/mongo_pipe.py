@@ -112,7 +112,7 @@ class Admin(object):
             user['num'] = z
             z+=1
         return data
-    def modifyUserRole(ulist, role):
+    def modifyUserRole(self,ulist, role):
         """changes role of all users ids in ids[]"""
         pipe=self.pipe
         pipe.connect()
