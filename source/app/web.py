@@ -222,7 +222,6 @@ class Admin(Parent):
                 kwargs['ref'] = '/'
                 kwargs['username'] = self.getCurrentUsername()
                 kwargs['data'] = _pipe.admin.getUserList()
-                print(kwargs['data'])
                 kwargs = self.mako_args(kwargs)
             tmpl = lookup.get_template("admin.html")
             try:
@@ -245,6 +244,7 @@ class Admin(Parent):
         if 'method' in kwargs:
             if kwargs['method'] == 'changeRole':
                 print(kwargs)
+                return json.dumps({'success': True})
         return json.dumps({'success': False})
 # mounts all webapps to cherrypy tree
 cherrypy.config.update({'tools.staticdir.root': path})
