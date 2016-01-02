@@ -116,7 +116,7 @@ class Admin(object):
         """changes role of all users ids in ids[]"""
         pipe=self.pipe
         pipe.connect()
-        for username in uList:
+        for username in list(uList):
             pipe.db.users.update_one(
                 {'username' : username},
                 {

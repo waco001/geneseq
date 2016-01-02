@@ -242,6 +242,9 @@ class Admin(Parent):
         logger.debug('POST kwargs: %s' % str(kwargs))
         if 'method' in kwargs:
             if kwargs['method'] == 'changeRole':
+                if(type(kwargs['selectUserID']) is str):
+                    kwargs['selectUserID'] = [kwargs['selectUserID']]
+                    print(type(kwargs['selectUserID']))
                 res=_pipe.admin.modifyUserRole(kwargs['selectUserID'],kwargs['ChangeUserTo'])
                 return json.dumps({'success': True})
         return json.dumps({'success': False})
