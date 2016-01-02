@@ -69,7 +69,7 @@
                                     <label for="selectUserID">Change user(s) with ID</label>
                                     <select id="selectUserID" name="selectUserID"multiple class="form-control">
                                         % for user in data:
-                                            <option>${user.get('num', 'ID is undefined')}</option>
+                                            <option value="${user.get('username', 'ERROR')}">${user.get('num', 'ID is undefined')}: ${user.get('username', 'Username is undefined')}</option>
                                         % endfor
                                     </select>
                                 </div>

@@ -240,10 +240,9 @@ class Admin(Parent):
         """
         logger.info('/admin POST request')
         logger.debug('POST kwargs: %s' % str(kwargs))
-
         if 'method' in kwargs:
             if kwargs['method'] == 'changeRole':
-                print(kwargs)
+                res=_pipe.admin.modifyUserRole(kwargs['selectUserID'].kwargs['ChangeUserTo'])
                 return json.dumps({'success': True})
         return json.dumps({'success': False})
 # mounts all webapps to cherrypy tree

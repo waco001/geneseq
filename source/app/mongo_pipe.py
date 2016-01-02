@@ -112,7 +112,22 @@ class Admin(object):
             user['num'] = z
             z+=1
         return data
-
+    def modifyUserRole(ulist, role):
+        """changes role of all users ids in ids[]"""
+        pipe=self.pipe
+        pipe.connect()
+        for username in uList:
+            pipe.db.users.update_one(
+                {'username' : username},
+                {
+                    "$set": {
+                        "role": role
+                    },
+                    "$currentDate": {"lastModified": True}
+                }
+            )
+        pipe.disconnect()
+        return True
 class Auth(object):
     def __init__(self, pipe):
         self.pipe = pipe
