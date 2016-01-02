@@ -108,7 +108,7 @@ class Admin(object):
         data = list(record)
         z=0
         for user in data:
-            user['timestamp'] = user['_id'].generation_time
+            user['timestamp'] = str(user['_id'].generation_time)[:-6]
             user['num'] = z
             z+=1
         return data
