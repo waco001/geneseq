@@ -26,7 +26,7 @@ var bodydonut = new function() {
                 var genes = ["thyroid","testis","ovary","leukocyte","skeletal","muscle","prostate","lymph","node","lung","adipose","adrenal","brain","breast","colon","kidney","heart","liver", "difference"
                 ];
                 
-                var tooltip = d3.select(".tooltip");
+                var texttip = d3.select(".texttip");
                 
                 var width = 600,
                     height = 400,
@@ -63,16 +63,12 @@ var bodydonut = new function() {
                     .attr("d", function(d, i, j) {
                         return arc.innerRadius(cwidth * j + inner_radius).outerRadius(cwidth * (j + 1) + inner_radius)(d)
                     }).on("mousemove", function(d, i, j) {
-                            tooltip.style("left", d3.event.pageX + 10 + "px");
-                            tooltip.style("top", d3.event.pageY - 25 + "px");
-                            tooltip.style("display", "inline-block");
-                            tooltip.select("span").text(dataset[j].gene + " " + genes[i] + " " + d.value);
+                            texttip.text(dataset[j].gene + " " + genes[i] + " " + d.value);
                         }).on("mouseout", function() {
-                            tooltip.style("display", "none");
+                            texttip.text("");
                         }).on("click", function(d, j) {
                             alert("Onclick Maybe?:" + d.data.name);
                         });
-                // Add a text label.
                     
                 var texts = svg.selectAll("text")
                                 .data(d3.values(dataset))
