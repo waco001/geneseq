@@ -90,7 +90,7 @@ var bodydonut = new function() {
                     .attr("stroke-width","0")
                     .style("text-anchor", "middle")
                     .attr("class", "inside")
-                    .text(function(d) { return 'x̄: 15'; });
+                    .text(function(d) { return ''; });
 
             }
         });
