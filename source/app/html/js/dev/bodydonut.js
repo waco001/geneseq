@@ -18,7 +18,7 @@ var bodydonut = new function() {
                 console.log('status: ' + status);
 
                 data = jQuery.parseJSON(data);
-                self.data = data;
+                self.dataset = data;
                           
                 var dataset = [
                 {gene:"LPAR",data : [10,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,14]}
@@ -52,9 +52,9 @@ var bodydonut = new function() {
                     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
                 
                 var gs = svg.selectAll("g")
-                .data(d3.values(dataset)).enter().append("g");
+                .data(d3.values(self.data)).enter().append("g");
                 gs.selectAll("path").data(function(d) {
-                        return pie(d.data);
+                        return pie(d.values);
                     })
                     .enter().append("path")
                     .attr("fill", function(d, i) {
@@ -63,7 +63,7 @@ var bodydonut = new function() {
                     .attr("d", function(d, i, j) {
                         return arc.innerRadius(cwidth * j + inner_radius).outerRadius(cwidth * (j + 1) + inner_radius)(d)
                     }).on("mousemove", function(d, i, j) {
-                            texttip.text(dataset[j].gene + " " + genes[i] + " " + d.value);
+                            texttip.text(self.dataset.values[j] + " " + self.dataset.values[i] + " ");
                         }).on("mouseout", function() {
                             texttip.text("");
                         }).on("click", function(d, j) {
