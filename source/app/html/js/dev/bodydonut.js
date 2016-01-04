@@ -83,7 +83,7 @@ var bodydonut = new function() {
                     .style("text-anchor", "end")
                     .attr("class", "inside")
                     .text(function(d,i){
-                                    return d.gene
+                                    return id;
                                 })
                 svg.append("text")
                     .attr("stroke","black")
