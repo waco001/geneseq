@@ -18,8 +18,9 @@ var bodydonut = new function() {
                 console.log('status: ' + status);
 
                 data = jQuery.parseJSON(data);
-                self.dataset = data;
-                          
+                self.data = data;
+                
+                
                 var dataset = [
                 {gene:"LPAR",data : [10,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,14]}
                 ];
@@ -52,9 +53,9 @@ var bodydonut = new function() {
                     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
                 
                 var gs = svg.selectAll("g")
-                .data(d3.values(self.data)).enter().append("g");
+                .data(d3.values(dataset)).enter().append("g");
                 gs.selectAll("path").data(function(d) {
-                        return pie(d.values);
+                        return pie(d.data);
                     })
                     .enter().append("path")
                     .attr("fill", function(d, i) {
@@ -63,7 +64,7 @@ var bodydonut = new function() {
                     .attr("d", function(d, i, j) {
                         return arc.innerRadius(cwidth * j + inner_radius).outerRadius(cwidth * (j + 1) + inner_radius)(d)
                     }).on("mousemove", function(d, i, j) {
-                            texttip.text(self.dataset.values[j] + " " + self.dataset.values[i] + " ");
+                            texttip.text('' + " " + genes[i] + " " + d.value);
                         }).on("mouseout", function() {
                             texttip.text("");
                         }).on("click", function(d, j) {
@@ -90,7 +91,7 @@ var bodydonut = new function() {
                     .attr("stroke-width","0")
                     .style("text-anchor", "middle")
                     .attr("class", "inside")
-                    .text(function(d) { return ''; });
+                    .text(function(d) { return 'x̄: 15'; });
 
             }
         });
