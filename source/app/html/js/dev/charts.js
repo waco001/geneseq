@@ -18,6 +18,14 @@ $(document).ready(function() {
 
         bodymap.plot(human_id, '/human/chart/bodymap', {'node': 'div#bodymap-chart'});
     }
+    if (bodymap != null) {
+        var bodydonut_node = $('<div />', {
+            id: 'bodydonut-chart',
+            class: 'chart'
+        }).appendTo('div#content-wrapper');
+
+        bodydonut.plot(human_id, '/human/chart/bodymap', {'node': 'div#bodydonut-chart'});
+    }
 
     if (brainspan != null) {
         var brainspan_node = $('<div />', {
