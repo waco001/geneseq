@@ -19,14 +19,19 @@ var bodydonut = new function() {
 
                 data = jQuery.parseJSON(data);
                 self.data = data;
-                
+               
                 
                 var dataset = [
                 {gene:"LPAR",data : [10,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,14]}
                 ];
                 var genes = ["thyroid","testis","ovary","leukocyte","skeletal","muscle","prostate","lymph","node","lung","adipose","adrenal","brain","breast","colon","kidney","heart","liver", "difference"
                 ];
-                
+                genes = [];
+                dataset = [{data:[], gene:"LPAR"}];
+                data.values.forEach(function(s){
+                    genes.push(s[0]);
+                    dataset[0].data.push(s[1])
+                });
                 var texttip = d3.select(".texttip");
                 
                 var width = 600,
