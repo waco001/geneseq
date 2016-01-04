@@ -26,7 +26,7 @@ var bodydonut = new function() {
                 var genes = ["thyroid","testis","ovary","leukocyte","skeletal","muscle","prostate","lymph","node","lung","adipose","adrenal","brain","breast","colon","kidney","heart","liver", "difference"
                 ];
                 
-                var tooltip = d3.select("#bodydonut-chart");
+                var tooltip = d3.select(".tooltip");
                 
                 var width = 600,
                     height = 400,

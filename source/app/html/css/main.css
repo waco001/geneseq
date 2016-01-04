@@ -20,7 +20,7 @@ font-size: 1em;
 font-family: sans-serif;
 }
 
-#bodydonut-chart{
+.tooltip{
     position: absolute;
     display: none;
     width: auto;
