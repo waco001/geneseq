@@ -24,7 +24,7 @@ $(document).ready(function() {
             class: 'chart'
         }).appendTo('div#content-wrapper');
         
-        $('div#content-wrapper').append('<div class="tooltip"><span></span></div>');
+        $('body').append('<div class="tooltip"><span></span></div>');
         
         bodydonut.plot(human_id, '/human/chart/bodymap', {'node': 'div#bodydonut-chart'});
     }
