@@ -26,7 +26,7 @@ $(document).ready(function() {
         
         bodydonut.plot(human_id, '/human/chart/bodymap', {'node': 'div#bodydonut-chart'});
         
-        $('#bodydonut-chart').append('<br><span class="texttip">ASDASDASD</span>');
+        $('<br><span class="texttip">ASDASDASD</span>').insertAfter('#bodydonut-chart');
     }
 
     if (brainspan != null) {
