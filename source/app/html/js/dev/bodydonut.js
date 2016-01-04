@@ -43,7 +43,7 @@ var bodydonut = new function() {
                 
                 var arc = d3.svg.arc();
                 
-                var svg = d3.select("body").append("svg")
+                var svg = d3.select("#bodydonut-chart").append("svg")
                     .attr("width", width)
                     .attr("height", height)
                     .attr("stroke-width", "2.5")
