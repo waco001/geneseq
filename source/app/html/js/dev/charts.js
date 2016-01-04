@@ -24,9 +24,9 @@ $(document).ready(function() {
             class: 'chart'
         }).appendTo('div#content-wrapper');
         
-        $('body').append('<div class="tooltip"><span></span></div>');
-        
         bodydonut.plot(human_id, '/human/chart/bodymap', {'node': 'div#bodydonut-chart'});
+        
+        $('#bodydonut-chart').append('<span class="textip">ASDASDASD</span>');
     }
 
     if (brainspan != null) {
