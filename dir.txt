@@ -1,0 +1,8 @@
+sudo docker run --name app -p 22:22 -p 80:8080 -v ~/Development/geneseq-portal:/data waco001/geneseq /sbin/my_init --enable-insecure-key
+
+ssh-keygen -f "/home/waco001/.ssh/known_hosts" -R 172.17.0.2
+
+ssh -i insecure_key root@172.17.0.2
+
+cd / && rm -rf /opt/ && mkdir /opt && git clone https://github.com/waco001/geneseq.git opt/ && python3 /opt/source/wsgi.py
+
