@@ -1,0 +1,3 @@
+*.pyc
+source/app/debug/*
+source/app/session/*
