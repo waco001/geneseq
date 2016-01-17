@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     var id = $('div#_id').attr('value');
     var human_id = $('div#human_id').attr('value');
@@ -25,8 +24,6 @@ $(document).ready(function() {
         }).appendTo('div#content-wrapper');
 
         bodydonut.plot(human_id, '/human/chart/bodymap', {'node': 'div#bodydonut-chart'});
-        
-        $('<br><span class="texttip"></span>').insertAfter('#bodydonut-chart');
     }
 
     if (brainspan != null) {

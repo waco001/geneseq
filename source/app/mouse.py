@@ -30,7 +30,7 @@ class Gene(Parent):
     """
     exposed = True
 
-    def GET(self, id=None, **kwargs):
+    def GET(self, id=None,ppf=None, **kwargs):
         """responds to GET requests
         Args:
             id: (string) mysql row id number of gene
@@ -48,25 +48,47 @@ class Gene(Parent):
 
         if id is None:
             return 'No id given'
-        tmpl = lookup.get_template("gene.html")
-        kwargs['Title'] = id
-        kwargs = self.mako_args(kwargs)
+        if ppf is None:
+            tmpl = lookup.get_template("gene.html")
+            kwargs['Title'] = id
+            kwargs = self.mako_args(kwargs)
 
-        gene = pipe.mouse.getGene(id)
-        header = list()
-        for key, value in gene.items():
-            name = settings.translate_readable(key)
-            if name == key:
-                name = ' '.join(key.split('_')).title()
+            gene = pipe.mouse.getGene(id)
+            header = list()
+            for key, value in gene.items():
+                name = settings.translate_readable(key)
+                if name == key:
+                    name = ' '.join(key.split('_')).title()
 
-            item = dict()
-            item = (name, key, value)
-            header.append(item)
-        kwargs['header'] = self.sort(header)
-        try:
-            return tmpl.render(**kwargs)
-        except:
-            return exceptions.html_error_template().render()
+                item = dict()
+                item = (name, key, value)
+                header.append(item)
+            kwargs['header'] = self.sort(header)
+            try:
+                return tmpl.render(**kwargs)
+            except:
+                return exceptions.html_error_template().render()
+        else:
+            tmpl = lookup.get_template("ppfgene.html")
+            kwargs['Title'] = id
+            kwargs = self.mako_args(kwargs)
+
+            gene = pipe.mouse.getGene(id)
+            header = list()
+            for key, value in gene.items():
+                name = settings.translate_readable(key)
+                if name == key:
+                    name = ' '.join(key.split('_')).title()
+
+                item = dict()
+                item = (name, key, value)
+                header.append(item)
+            kwargs['header'] = self.sort(header)
+            kwargs['ppf'] = True
+            try:
+                return tmpl.render(**kwargs)
+            except:
+                return exceptions.html_error_template().render()
 
     def sort(self, header):
         """

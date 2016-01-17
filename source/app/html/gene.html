@@ -7,7 +7,7 @@
 ##expr_next
 ##geneID
 ##geneID_human
-##geneID_mouse 
+##geneID_mouse
 
 <%block name="resources">
    <script type="text/javascript" src="/js/lib/d3.js"></script>
@@ -27,6 +27,7 @@
       % for item in header:
       <li><div>${item[0]}</div><div id="${item[1]}" value="${item[2]}">${item[2]}</div></li>
       % endfor
+      <li><div>Printer Friendly Page</div><a href="gene?id=${header[0][2]}&ppf=True">Link</a></li>
       </ul>
    </div>
 </div>
