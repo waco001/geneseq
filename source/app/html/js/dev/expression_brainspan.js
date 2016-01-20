@@ -281,7 +281,7 @@ var brainspan = new function() {
                 .attr('x', (width.outer / 2))
                 .attr('y', margin.top / 2)
                 .attr('text-anchor', 'middle')
-                .text('Brainspan Expression');
+                .text(data.title);
             }
         });
 
@@ -308,7 +308,7 @@ var brainspan = new function() {
      * @param {string} id - gene id to plot
      * @param {string} source - data source to POST to
      * @param {dict} params - optional
-     *  
+     *
      */
     this.plot = function(id, source, params) {
         console.log('brainspan');

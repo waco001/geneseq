@@ -2,7 +2,7 @@
 $(document).ready(function() {
     var id = $('div#_id').attr('value');
     var human_id = $('div#human_id').attr('value');
-    if (mouse != null) {
+   if (mouse != null) {
         var mouse_node = $('<div />', {
             id: 'mouse-chart',
             class: 'chart'
@@ -25,7 +25,7 @@ $(document).ready(function() {
         }).appendTo('div#content-wrapper');
 
         bodydonut.plot(human_id, '/human/chart/bodymap', {'node': 'div#bodydonut-chart'});
-        
+
         $('<br><span class="texttip"></span>').insertAfter('#bodydonut-chart');
     }
 
@@ -38,4 +38,5 @@ $(document).ready(function() {
         brainspan.plot(human_id, '/human/chart/brainspan', {'node': 'div#brainspan-chart',
                                                             'width': 100});
     }
+
 });

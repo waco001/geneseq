@@ -270,7 +270,7 @@ class Chart(Parent):
         names = [x[1] for x in columns]
 
         ret = {'values': values, 'names': names, 'colors': order}
-        ret['title'] = 'Celltype Expression in Mice'
+        ret['title'] = 'Mouse CNS Celltype Expression'
         ret['min'] = min([x[-1] for x in values])
         ret['max'] = max([x[-1] for x in values])
         ret['axis_length'] = max(len(x) for x in names)

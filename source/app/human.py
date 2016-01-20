@@ -292,7 +292,7 @@ class Brainspan(Parent):
             ret[region] = sorted(ret[region], key=lambda i: i[0])
 
         ret['names'] = columns
-        ret['title'] = 'Human Brainspan Expression'
+        ret['title'] = 'Human Brain Development (Brainspan)'
         ret['min'] = min([x['value'] for x in data])
         ret['max'] = max([x['value'] for x in data])
         ret['duration'] = max([x['age'] for x in data])
