@@ -21,7 +21,7 @@ class Mouse(object):
         self.table = Table(mako)
         self.gene = Gene(mako)
         self.chart = Chart(mako)
-        self.search = Search(mako)
+        #self.search = Search(mako)
 
 
 class Gene(Parent):
@@ -278,12 +278,13 @@ class Chart(Parent):
         return ret
 
 
-class Search(Parent):
+'''class Search(Parent):
     """handles search functionality
     mounted on /mouse/search
     """
 
     def GET(self, **kwargs):
+        print("MOUSE.py@##########################")
         """responds to data GET requests
         Args:
             query (str): query string for database
@@ -313,3 +314,4 @@ class Search(Parent):
             return tmpl.render(**kwargs)
         except:
             return exceptions.html_error_template().render()
+'''

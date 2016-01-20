@@ -54,7 +54,7 @@ class Root(Parent):
 class Gene(Parent):
     def GET(self, id=None, **kwargs):
         """
-        responds to GET requests. Determines if 
+        responds to GET requests. Determines if
         human or mouse gene requested
         Args:
             id: (string) gene id
@@ -86,11 +86,14 @@ class Search(Parent):
         logger.info('/data GET request')
         logger.debug('GET kwargs: %s' % kwargs)
         # logger.debug('global test %s' % app.settings.Settings.test)
-
+        print(kwargs)
+        print("###########")
         if 'query' in kwargs:
             query = kwargs['query']
             data = self.pipe.textSearch(query)
-
+            if ('api' in kwargs):
+                print("ASDASDASDASDASDASD")
+                return json.dumps(data)
             kwargs = {'Title': 'Mouse Expression Table',
                       'data': data,
                       'columnNames': app.settings.getColumnNames('mouse'),

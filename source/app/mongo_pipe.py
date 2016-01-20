@@ -559,7 +559,6 @@ class Mouse(Parent):
 
         data = super().getTable(**kwargs)
         return data
-
     def textSearch(self, query):
         logger.debug('searching db for key %s' % query)
         query = '.*%s.*' % query

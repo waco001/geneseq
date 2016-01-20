@@ -2,7 +2,7 @@ body{margin:0;font-family:aller;background:#f0f0f0}ul{list-style-type:none;paddi
 
 .arc path {
   stroke: #fff;
-  stroke-width:3px;  
+  stroke-width:3px;
 }
 .passed {
   opacity: 0.3;
@@ -33,7 +33,7 @@ font-family: sans-serif;
     font: 12px sans-serif;
     padding: 5px;
     text-align: center;
-    
+
 }
 
 path:hover{
@@ -44,3 +44,5 @@ path:hover{
     font-family: 'Roboto Condensed', sans-serif;
     color: black;
 }
+
+/* Custom CSS For live search */

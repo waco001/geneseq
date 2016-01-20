@@ -10,6 +10,7 @@
     <script type="text/javascript" src="/js/lib/bootstrap.js"></script>
     <script type="text/javascript" src="/js/lib/underscore-min.js"></script>
     <script type="text/javascript" src="/js/dev/main.js"></script>
+    <script type="text/javascript" src="/js/dev/livesearch.js"></script>
 
 ##
     <%block name="resources" />
@@ -42,7 +43,7 @@
           % if Title is not 'Home':
           <div id="top-bar-wrapper">
             <form class="top-bar-item pure-form" name="search" action="/search" method="get">
-              <input class="pure-input-1" name="query" type="text" placeholder="Search"
+              <input class="pure-input-1 LiveSearch" name="query" type="text" placeholder="Search"
               % if not query is UNDEFINED:
               value="${query}"
               % endif
