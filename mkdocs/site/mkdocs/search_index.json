@@ -1,0 +1,49 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Welcome to geneseq\n\n\nThis documentation is intended only to setup the application server. It has no API, so this just a installation and setup guide.\n\n\nPrerequisites\n\n\n\n\nInstall Docker\n\n\n\n\nDownload and Run the Docker Image\n\n\ndocker pull waco001/geneseq\n\n\nMake a shared folder\n\n\nCreate a folder on your server to act as a shared folder between the docker image and your hard drive.\n\n\ndocker-portal/\n    /db/  # An empty folder for mongodb to use\n    mongodump.tar.gz # The latest mongodb dump\n\n\n\nImport the MongoDump\n\n\nmongorestore --db gene_locale dump/gene_locale --drop\n\nThis will overwrite anything in the db \ngenelocale\n\n\nStart the docker image\n\n\nsudo docker run --name app -p 22:22 -p 80:8080 -v geneseq-portal:/data waco001/geneseq /sbin/my_init --enable-insecure-key\n\n\nDownload Insecure SSH Key (Temporary Testing)\n\n\n# Download the insecure private key\ncurl -o insecure_key -fSL https://github.com/phusion/baseimage-docker/raw/master/image/services/sshd/keys/insecure_key\nchmod 600 insecure_key\n\n# Find image ip address\ndocker inspect \ncontainer id\n\n\n# Login to the container\nssh -i insecure_key root@\nIP address\n\n\n\n\n\nRun the Python Development Server\n\n\ncd / \n rm -rf /opt/ \n mkdir /opt \n git clone https://github.com/waco001/geneseq.git opt/ \n python3 /opt/source/wsgi.py", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#welcome-to-geneseq", 
+            "text": "This documentation is intended only to setup the application server. It has no API, so this just a installation and setup guide.", 
+            "title": "Welcome to geneseq"
+        }, 
+        {
+            "location": "/#prerequisites", 
+            "text": "Install Docker", 
+            "title": "Prerequisites"
+        }, 
+        {
+            "location": "/#download-and-run-the-docker-image", 
+            "text": "docker pull waco001/geneseq", 
+            "title": "Download and Run the Docker Image"
+        }, 
+        {
+            "location": "/#make-a-shared-folder", 
+            "text": "Create a folder on your server to act as a shared folder between the docker image and your hard drive.  docker-portal/\n    /db/  # An empty folder for mongodb to use\n    mongodump.tar.gz # The latest mongodb dump", 
+            "title": "Make a shared folder"
+        }, 
+        {
+            "location": "/#import-the-mongodump", 
+            "text": "mongorestore --db gene_locale dump/gene_locale --drop \nThis will overwrite anything in the db  genelocale", 
+            "title": "Import the MongoDump"
+        }, 
+        {
+            "location": "/#start-the-docker-image", 
+            "text": "sudo docker run --name app -p 22:22 -p 80:8080 -v geneseq-portal:/data waco001/geneseq /sbin/my_init --enable-insecure-key", 
+            "title": "Start the docker image"
+        }, 
+        {
+            "location": "/#download-insecure-ssh-key-temporary-testing", 
+            "text": "# Download the insecure private key\ncurl -o insecure_key -fSL https://github.com/phusion/baseimage-docker/raw/master/image/services/sshd/keys/insecure_key\nchmod 600 insecure_key\n\n# Find image ip address\ndocker inspect  container id \n\n# Login to the container\nssh -i insecure_key root@ IP address", 
+            "title": "Download Insecure SSH Key (Temporary Testing)"
+        }, 
+        {
+            "location": "/#run-the-python-development-server", 
+            "text": "cd /   rm -rf /opt/   mkdir /opt   git clone https://github.com/waco001/geneseq.git opt/   python3 /opt/source/wsgi.py", 
+            "title": "Run the Python Development Server"
+        }
+    ]
+}

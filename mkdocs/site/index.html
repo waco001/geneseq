@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>geneseq</title>
+  
+
+  <link rel="shortcut icon" href="./img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "None";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script>
+  <script src="./js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> geneseq</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href=".">Home</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#welcome-to-geneseq">Welcome to geneseq</a></li>
+                
+                    <li><a class="toctree-l4" href="#prerequisites">Prerequisites</a></li>
+                
+                    <li><a class="toctree-l4" href="#download-and-run-the-docker-image">Download and Run the Docker Image</a></li>
+                
+                    <li><a class="toctree-l4" href="#make-a-shared-folder">Make a shared folder</a></li>
+                
+                    <li><a class="toctree-l4" href="#import-the-mongodump">Import the MongoDump</a></li>
+                
+                    <li><a class="toctree-l4" href="#start-the-docker-image">Start the docker image</a></li>
+                
+                    <li><a class="toctree-l4" href="#download-insecure-ssh-key-temporary-testing">Download Insecure SSH Key (Temporary Testing)</a></li>
+                
+                    <li><a class="toctree-l4" href="#run-the-python-development-server">Run the Python Development Server</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">geneseq</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="welcome-to-geneseq">Welcome to geneseq</h1>
+<p>This documentation is intended only to setup the application server. It has no API, so this just a installation and setup guide.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Install Docker</li>
+</ul>
+<h2 id="download-and-run-the-docker-image">Download and Run the Docker Image</h2>
+<p><code>docker pull waco001/geneseq</code></p>
+<h2 id="make-a-shared-folder">Make a shared folder</h2>
+<p>Create a folder on your server to act as a shared folder between the docker image and your hard drive.</p>
+<pre><code>docker-portal/
+    /db/  # An empty folder for mongodb to use
+    mongodump.tar.gz # The latest mongodb dump
+</code></pre>
+<h2 id="import-the-mongodump">Import the MongoDump</h2>
+<p><code>mongorestore --db gene_locale dump/gene_locale --drop</code><br />
+This will overwrite anything in the db <code>genelocale</code></p>
+<h2 id="start-the-docker-image">Start the docker image</h2>
+<p><code>sudo docker run --name app -p 22:22 -p 80:8080 -v geneseq-portal:/data waco001/geneseq /sbin/my_init --enable-insecure-key</code></p>
+<h2 id="download-insecure-ssh-key-temporary-testing">Download Insecure SSH Key (Temporary Testing)</h2>
+<pre><code># Download the insecure private key
+curl -o insecure_key -fSL https://github.com/phusion/baseimage-docker/raw/master/image/services/sshd/keys/insecure_key
+chmod 600 insecure_key
+
+# Find image ip address
+docker inspect &lt;container id&gt;
+
+# Login to the container
+ssh -i insecure_key root@&lt;IP address&gt;
+</code></pre>
+
+<h2 id="run-the-python-development-server">Run the Python Development Server</h2>
+<p><code>cd / &amp;&amp; rm -rf /opt/ &amp;&amp; mkdir /opt &amp;&amp; git clone https://github.com/waco001/geneseq.git opt/ &amp;&amp; python3 /opt/source/wsgi.py</code></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.14.0
+Build Date UTC : 2016-01-24 05:02:17.332039
+-->
