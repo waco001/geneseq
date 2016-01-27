@@ -3,13 +3,9 @@
 
 **genseq** is a tool that allows all users to explore the human genome and view all information regarding that query and any visual derivations of that data. Developed at Gerstein Lab of Yale University under the guidance of Drs. Robert Kitchen and Mark Gerstein.
 
-## Code Example
-
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
-
 ## Motivation
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+Currently, scientists cannot easily interpret information regarding genes. The current methods are hard to use and filled with
 
 ## Installation
 
